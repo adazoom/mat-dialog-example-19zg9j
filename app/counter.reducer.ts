@@ -1,0 +1,47 @@
+import { ActionReducerMap, createReducer, on } from '@ngrx/store';
+import { listItems, editItem } from './counter.actions';
+import { Item } from './confirmation-dialog.component';
+
+export const counterFeatureKey = 'counter';
+
+export interface AppState {
+  [counterFeatureKey]: CounterState;
+}
+
+export const reducers: ActionReducerMap<AppState> = {
+  [counterFeatureKey]: reducer,
+};
+
+export interface CounterState {
+  items: ReadonlyArray<Item>;
+}
+
+export const initialState: CounterState = {
+  items: [],
+};
+
+const _counterReducer = createReducer(
+  initialState,
+  on(listItems, (state, { response }) => ({ ...state, items: response })),
+  on(editItem, (state, { id, newName }) => ({
+    ...state,
+    items: state.items.map((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+      return {
+        ...item,
+        name: newName,
+      };
+    }),
+  }))
+);
+
+export function reducer(state: CounterState, action) {
+  return _counterReducer(state, action);
+}
+
+/*
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://github.com/ngrx/platform
+*/

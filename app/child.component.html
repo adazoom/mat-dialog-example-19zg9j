@@ -1,0 +1,8 @@
+hello
+{{ itemList.length }}
+<div *ngFor="let item of itemList">
+  <div>
+    {{ item.name }}
+    <button (click)="openDialog()"></button>
+  </div>
+</div>
