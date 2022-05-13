@@ -10,7 +10,7 @@ import { ConfirmationDialog, Item } from './confirmation-dialog.component';
 import { Service } from './test.service';
 import { getItems } from './counter.selector';
 import { Store, select } from '@ngrx/store';
-import { AppState } from './counter.reducer';
+import { listItems, editItem } from './counter.actions';
 
 @Component({
   selector: 'material-app',
@@ -19,20 +19,22 @@ import { AppState } from './counter.reducer';
 export class AppComponent {
   parentItems: Item[] = [];
 
-  constructor(private store: Store<{ AppState }>, service: Service) {
-    console.log('in parent consturctor items from server are');
-    this.parentItems = service.getItems();
-    console.log(JSON.stringify(this.parentItems));
-    // store
-    //   .select(getItems)
-    //   .pipe()
-    //   .subscribe((items) => {
-    //     console.log('got items from store');
-    //     console.log(items);
-    //   });
+  constructor(
+    private readonly store: Store<{}>,
+    private readonly service: Service
+  ) {
+    console.log('in parent consturctor');
+    this.getParentItems();
+
     this.store.pipe(select(getItems)).subscribe((items) => {
-      console.log('got items from store');
+      console.log('got items from store:');
       console.log(JSON.stringify(items));
+      this.parentItems = items;
     });
+  }
+
+  private getParentItems() {
+    const response = this.service.getItems();
+    this.store.dispatch(listItems({ response }));
   }
 }

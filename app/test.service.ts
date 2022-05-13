@@ -14,7 +14,6 @@ export class Service {
 
   getItems() {
     const response = this.serviceItems;
-    this.store.dispatch(listItems({ response }));
     return response;
   }
 

@@ -50,7 +50,7 @@ import { ChildComponent } from './child.component';
 import { ConfirmationDialog } from './confirmation-dialog.component';
 import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './counter.reducer';
+import { reducer, FEATURE_ID } from './counter.reducer';
 
 /**
  * NgModule that includes all Material modules that are required to serve
@@ -111,7 +111,8 @@ export class MaterialModule {}
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(FEATURE_ID, reducer),
   ],
   declarations: [
     AppComponent,

@@ -2,15 +2,7 @@ import { ActionReducerMap, createReducer, on } from '@ngrx/store';
 import { listItems, editItem } from './counter.actions';
 import { Item } from './confirmation-dialog.component';
 
-export const counterFeatureKey = 'counter';
-
-export interface AppState {
-  [counterFeatureKey]: CounterState;
-}
-
-export const reducers: ActionReducerMap<AppState> = {
-  [counterFeatureKey]: reducer,
-};
+export const FEATURE_ID = 'counter';
 
 export interface CounterState {
   items: ReadonlyArray<Item>;

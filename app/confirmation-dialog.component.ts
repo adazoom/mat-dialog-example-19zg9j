@@ -32,6 +32,6 @@ export class ConfirmationDialog {
 
   onConfirmClick(): void {
     this.service.editItems(0, this.animal);
-    this.dialogRef.close(true);
+    this.dialogRef.close();
   }
 }
