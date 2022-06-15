@@ -8,9 +8,13 @@ import {
 } from '@angular/material';
 import { Service } from './test.service';
 
+export interface Config {
+  handle: string;
+}
 export interface Item {
   id: number;
   name: string;
+  config?: Config;
 }
 
 @Component({

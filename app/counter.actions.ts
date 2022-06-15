@@ -11,6 +11,10 @@ export const editItem = createAction(
   props<{ id: number; newName: string }>()
 );
 
+export const createItem = createAction(
+  '[Component] create item',
+  props<{ id: number; handle: string }>()
+);
 /*
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at https://github.com/ngrx/platform

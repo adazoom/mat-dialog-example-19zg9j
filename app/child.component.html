@@ -3,6 +3,6 @@ hello
 <div *ngFor="let item of itemList">
   <div>
     {{ item.name }}
-    <button (click)="openDialog()"></button>
+    <button (click)="openDialog(item)">Click me!</button>
   </div>
 </div>

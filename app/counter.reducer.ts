@@ -1,5 +1,5 @@
 import { ActionReducerMap, createReducer, on } from '@ngrx/store';
-import { listItems, editItem } from './counter.actions';
+import { listItems, editItem, createItem } from './counter.actions';
 import { Item } from './confirmation-dialog.component';
 
 export const FEATURE_ID = 'counter';
@@ -25,6 +25,16 @@ const _counterReducer = createReducer(
         ...item,
         name: newName,
       };
+    }),
+  })),
+  on(createItem, (state, { id, handle }) => ({
+    ...state,
+    items: state.items.map((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+      const config = { handle };
+      return { ...item, config };
     }),
   }))
 );
